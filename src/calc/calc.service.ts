@@ -7,6 +7,7 @@ export class CalcService {
 
   calculate(sendCalcDto: SendCalcDto) {
     this.logger.log("Calculus works.");
+    this.logger.log(sendCalcDto.calculus);
     return 'This action do calculus';
   }
 }
