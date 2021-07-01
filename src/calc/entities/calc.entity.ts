@@ -7,30 +7,27 @@ export class Calc {
 
     calculus: string
     items: (string | Operator)[]
+    result: string
 }
 
 export class Operator { 
-    constructor(value: string, priority: number) {
+    constructor(value: string, priority: number, name: string) {
         this.value = value;
         this.priority = priority;
+        this.name = name;
     }
 
     value: string
     priority: number
+    name: string
 }
 
 export class CurrentItem {
-    constructor(value: string="", previousIsNumber: boolean=false, previousIsOperator: boolean=false, previousIsDot: boolean=false, hasDot: boolean=false) {
+    constructor(value: string="", hasDot: boolean=false) {
         this.value = value;
         this.hasDot = hasDot;
-        this.previousIsNumber = previousIsNumber;
-        this.previousIsOperator = previousIsOperator;
-        this.previousIsDot = previousIsDot;
     }
 
-    hasDot: boolean
-    previousIsNumber: boolean
-    previousIsOperator: boolean
-    previousIsDot: boolean
     value: string
+    hasDot: boolean
 }

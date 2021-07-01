@@ -1,7 +1,8 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable, Logger } from '@nestjs/common';
 import { isValidationOptions } from 'class-validator';
 import { SendCalcDto } from './dto/send-calc.dto';
 import { Calc, CurrentItem, Operator } from './entities/calc.entity';
+import { MathService } from './math.service';
 import * as data from './operators.json';
 
 @Injectable()
@@ -9,78 +10,90 @@ export class CalcService {
   private readonly myLogger = new Logger(CalcService.name);
   private readonly myOperators: Map<string, Operator> = new Map();
 
-  constructor() {
+  constructor(
+    private mathService: MathService
+  ) {
     data.operators.forEach(obj => {
-      this.myOperators.set(obj.value, new Operator(obj.value, Number(obj.priority)))
+      this.myOperators.set(obj.value, new Operator(obj.value, Number(obj.priority), obj.name))
     })
   }
   
   calculate(sendCalcDto: SendCalcDto) {
-    this.myLogger.log("Calculus works.");
-    this.myLogger.log(sendCalcDto.calculus);
-
     const calc = this.parse(sendCalcDto);
-    this.myLogger.log(JSON.stringify(calc.items));
+    calc.result = this.doCalculate(calc);
     
-    return 'This action do calculus';
+    return {
+      calculus: calc.calculus,
+      result: this.doCalculate(calc)
+    };
   }
 
   private parse(calcDto: SendCalcDto): Calc {
-    // const result = new Calc(calcDto.calculus);
     const items: (string |Operator)[] = []
     let curr = new CurrentItem();
 
     const chars = calcDto.calculus.split("");
     for (let i=0; i<chars.length; i++) {
 
-      // eliminating erros
-      if (this.isFirst(i) && this.isDot(chars[i]) && this.isOperator(chars[i])) {
-        this.myLogger.error("Cannot start with dot or operator.")
-        break;
+      // Handle wrong items composition
+      if (chars[i] === ' ') {
+        this.throwErrorParse(`can't contain any white-space: ${calcDto.calculus}`);
+      }
+
+      if (!this.isOperator(chars[i]) && !this.isDot(chars[i]) && !this.isNumber(chars[i])) {
+        this.throwErrorParse(`un-recognised charater: ${calcDto.calculus}`);
+      }
+
+      if (this.isFirst(i) && (this.isDot(chars[i]) || this.isOperator(chars[i]))) {
+        this.throwErrorParse(`can't start with dot or operator: ${calcDto.calculus}`);
       }
 
       if (this.isLast(i, chars) && (this.isOperator(chars[i]) || this.isDot(chars[i]))) {
-        this.myLogger.error("Cannot end with dot or operator.")
-        break;
+        this.throwErrorParse(`can't end with dot or operator: ${calcDto.calculus}`);
       }
 
-      if (((curr.previousIsOperator || curr.previousIsDot) && (this.isOperator(chars[i]) || this.isDot(chars[i]))) || this.isDot(chars[i]) && curr.hasDot) {
-        // error --> two dot, two operator, or dot/operator can't be after one dot/operator, or two dot in a value
-        this.myLogger.error("Two dots, two operators, or dot/operator can't be after one dot/operator, or two dots in a value.")
-        break;
+      if (this.isDot(chars[i]) && curr.hasDot) {
+        this.throwErrorParse(`an item can't have two dots: ${calcDto.calculus}`);
       }
 
-      // last item -> add value & break
-      if (this.isLast(i, chars) && this.isNumber(chars[i])) {
-        if (curr.previousIsNumber || curr.previousIsDot) {
-          items.push(curr.value + chars[i]);
-        } else if (curr.previousIsOperator) {
-          items.push(chars[i]);
+      if (!this.isLast(i, chars)) {
+        if ((this.isOperator(chars[i]) || this.isDot(chars[i])) && (this.isOperator(chars[i+1]) || this.isDot(chars[i+1]))) {
+          this.throwErrorParse(`two dots, two operators, or dot/operator can't be after one dot/operator: ${calcDto.calculus}`);
         }
+      }
+
+      // Handle the last char, which is suposed to be a number
+      if (this.isLast(i, chars) && this.isNumber(chars[i])) {
+        items.push(curr.value + chars[i]);
         continue;
       }
 
-      // adding char to value
-      if (this.isNumber(chars[i]) && (curr.previousIsNumber || curr.previousIsDot || this.isFirst(i))) {
-        curr = new CurrentItem(curr.value += chars[i], true, false, false, curr.hasDot);
+      // Adds every number or dot
+      if (this.isNumber(chars[i]) && (this.isNumber(chars[i+1]) || this.isDot(chars[i+1]))) {
+        curr = new CurrentItem(curr.value += chars[i], curr.hasDot);
         continue;
       }
 
       if (this.isDot(chars[i])) {
-        curr = new CurrentItem(curr.value += chars[i], false, false, true, true);
+        curr = new CurrentItem(curr.value += chars[i], true);
         continue;
       }
 
-      // break
-      if (this.isNumber(chars[i]) && curr.previousIsOperator) {
-        items.push(this.myOperators.get(curr.value))
-        curr = new CurrentItem(chars[i], true, false, false, false);
+      if (this.isLast(i, chars)) {
+        this.throwErrorParse(`Last character isn't number, operator or dot: ${calcDto.calculus}`);
+        continue; // should never get there
+      }
+
+      // Handle a  switch from number/operator happen
+      if (this.isNumber(chars[i]) && this.isOperator(chars[i+1])) {
+        items.push(curr.value + chars[i]);
+        curr = new CurrentItem("", false);
         continue;
       }
 
-      if (this.isOperator(chars[i]) && curr.previousIsNumber) {
-        items.push(curr.value);
-        curr = new CurrentItem(chars[i], false, true, false, false);
+      if (this.isOperator(chars[i]) && this.isNumber(chars[i+1])) {
+        items.push(this.myOperators.get(chars[i]));
+        curr = new CurrentItem("", false);
         continue;
       }
     }
@@ -101,16 +114,62 @@ export class CalcService {
   }
 
   private isLast(index: number, chars: string[]): boolean {
-    return index === chars.length;
+    return index == (chars.length-1);
   }
 
   private isDot(char: string): boolean {
     return char === '.';
   }
 
-  private doCalculate() {
-
+  private throwErrorParse(message) {
+    const completeMsg = `An error occured during the execution of the calculus: ${message}`;
+    this.myLogger.error(completeMsg);
+    throw new HttpException(completeMsg, HttpStatus.UNPROCESSABLE_ENTITY)
   }
 
+  private doCalculate(calc: Calc): string {
+    const items: (string|Operator)[] = Array.from(calc.items)    
+    let nbOperators: number = 0;
+    items.forEach(item => {
+      if (item instanceof Operator) {
+        nbOperators++;
+      }
+    })
+
+    let higherPrio = 0;
+    for (let j=0; j<nbOperators; j++) {
+      higherPrio = 0;
+      higherPrio = this.getHigherPrio(items);
+      for (let i=0; i<items.length; i++) {
+
+        if ( typeof items[i] == 'string') {
+          continue;
+        }
+
+        if ((items[i] as Operator).priority === higherPrio) {
+          items[i-1] = this.mathService.getMathFunction((items[i] as Operator).name)(items[i-1], items[i+1]);
+          items.splice(i+1, 1)
+          items.splice(i, 1)
+          break;
+        }
+      }
+    }
+    
+    return items[0] as string;
+  }
+
+  private getHigherPrio(items: (string|Operator)[]): number {
+    let result = 0
+
+    items.forEach(item => {
+      if (item instanceof Operator) {
+        if (item.priority > result) {
+          result = item.priority;
+        }
+      }
+    })
+
+    return result;
+  }
 
 }

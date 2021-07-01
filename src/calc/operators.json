@@ -1,4 +1,6 @@
-{ "operators": [{
-    "value" : "+",
-    "priority" : "1"
-}] }   
+{ "operators": [
+    {"value" : "+", "priority" : "1", "name": "addition"},
+    {"value" : "-", "priority" : "1", "name": "substraction"},
+    {"value" : "*", "priority" : "2", "name": "multiplication"},
+    {"value" : "/", "priority" : "2", "name": "division"}
+]}   
