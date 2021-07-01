@@ -7,14 +7,20 @@ import * as data from './operators.json';
 @Injectable()
 export class CalcService {
   private readonly myLogger = new Logger(CalcService.name);
-  // private readonly myOperators = new Map(data.operators.map(x => [x.value, x.priority]));
-  private readonly myOperators: Map<string, string> = new Map();
+  private readonly myOperators: Map<string, Operator> = new Map();
+
+  constructor() {
+    data.operators.forEach(obj => {
+      this.myOperators.set(obj.value, new Operator(obj.value, Number(obj.priority)))
+    })
+  }
   
   calculate(sendCalcDto: SendCalcDto) {
     this.myLogger.log("Calculus works.");
     this.myLogger.log(sendCalcDto.calculus);
 
     const calc = this.parse(sendCalcDto);
+    this.myLogger.log(JSON.stringify(calc.items));
     
     return 'This action do calculus';
   }
@@ -33,34 +39,49 @@ export class CalcService {
         break;
       }
 
+      if (this.isLast(i, chars) && (this.isOperator(chars[i]) || this.isDot(chars[i]))) {
+        this.myLogger.error("Cannot end with dot or operator.")
+        break;
+      }
+
       if (((curr.previousIsOperator || curr.previousIsDot) && (this.isOperator(chars[i]) || this.isDot(chars[i]))) || this.isDot(chars[i]) && curr.hasDot) {
         // error --> two dot, two operator, or dot/operator can't be after one dot/operator, or two dot in a value
         this.myLogger.error("Two dots, two operators, or dot/operator can't be after one dot/operator, or two dots in a value.")
         break;
       }
 
+      // last item -> add value & break
+      if (this.isLast(i, chars) && this.isNumber(chars[i])) {
+        if (curr.previousIsNumber || curr.previousIsDot) {
+          items.push(curr.value + chars[i]);
+        } else if (curr.previousIsOperator) {
+          items.push(chars[i]);
+        }
+        continue;
+      }
+
       // adding char to value
-      if (this.isNumber(chars[i]) && (curr.previousIsNumber || curr.previousIsDot)) {
-        curr.value += chars[i];
+      if (this.isNumber(chars[i]) && (curr.previousIsNumber || curr.previousIsDot || this.isFirst(i))) {
         curr = new CurrentItem(curr.value += chars[i], true, false, false, curr.hasDot);
         continue;
       }
 
       if (this.isDot(chars[i])) {
-        curr.value += chars[i];
         curr = new CurrentItem(curr.value += chars[i], false, false, true, true);
         continue;
       }
 
-      // breaks
+      // break
       if (this.isNumber(chars[i]) && curr.previousIsOperator) {
-        items.push(new Operator(curr.value, Number(this.myOperators.get(curr.value))))
+        items.push(this.myOperators.get(curr.value))
         curr = new CurrentItem(chars[i], true, false, false, false);
+        continue;
       }
 
       if (this.isOperator(chars[i]) && curr.previousIsNumber) {
         items.push(curr.value);
         curr = new CurrentItem(chars[i], false, true, false, false);
+        continue;
       }
     }
 
@@ -77,6 +98,10 @@ export class CalcService {
 
   private isFirst(i: number): boolean {
     return i === 0;
+  }
+
+  private isLast(index: number, chars: string[]): boolean {
+    return index === chars.length;
   }
 
   private isDot(char: string): boolean {
