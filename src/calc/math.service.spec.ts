@@ -37,4 +37,19 @@ describe('CalcService', () => {
     expect(service.substraction("10", "0.5")).toBe("9.5");
   });
 
+  test('Should return func addition', () => {
+    expect(service.getMathFunction("addition")).toBe(service.addition);
+  });
+
+  test('Should return func substraction', () => {
+    expect(service.getMathFunction("substraction")).toBe(service.substraction);
+  });
+
+  test('Should return func multiplication', () => {
+    expect(service.getMathFunction("multiplication")).toBe(service.multiplication);
+  });
+
+  test('Should return func division', () => {
+    expect(service.getMathFunction("division")).toBe(service.division);
+  });
 });

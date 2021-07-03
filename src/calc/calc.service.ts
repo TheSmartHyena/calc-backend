@@ -19,7 +19,7 @@ export class CalcService {
   }
   
   calculate(sendCalcDto: SendCalcDto) {
-    const calc = this.parse(sendCalcDto);
+    const calc = this.parse(sendCalcDto.calculus);
     calc.result = this.doCalculate(calc);
     
     return {
@@ -28,37 +28,37 @@ export class CalcService {
     };
   }
 
-  private parse(calcDto: SendCalcDto): Calc {
+  parse(calculus: string): Calc {
     const items: (string |Operator)[] = []
     let curr = new CurrentItem();
 
-    const chars = calcDto.calculus.split("");
+    const chars = calculus.split("");
     for (let i=0; i<chars.length; i++) {
 
       // Handle wrong items composition
       if (chars[i] === ' ') {
-        this.throwErrorParse(`can't contain any white-space: ${calcDto.calculus}`);
+        this.throwErrorParse(`can't contain any white-space: ${calculus}`);
       }
 
       if (!this.isOperator(chars[i]) && !this.isDot(chars[i]) && !this.isNumber(chars[i])) {
-        this.throwErrorParse(`un-recognised charater: ${calcDto.calculus}`);
+        this.throwErrorParse(`un-recognised charater: ${calculus}`);
       }
 
       if (this.isFirst(i) && (this.isDot(chars[i]) || this.isOperator(chars[i]))) {
-        this.throwErrorParse(`can't start with dot or operator: ${calcDto.calculus}`);
+        this.throwErrorParse(`can't start with dot or operator: ${calculus}`);
       }
 
       if (this.isLast(i, chars) && (this.isOperator(chars[i]) || this.isDot(chars[i]))) {
-        this.throwErrorParse(`can't end with dot or operator: ${calcDto.calculus}`);
+        this.throwErrorParse(`can't end with dot or operator: ${calculus}`);
       }
 
       if (this.isDot(chars[i]) && curr.hasDot) {
-        this.throwErrorParse(`an item can't have two dots: ${calcDto.calculus}`);
+        this.throwErrorParse(`an item can't have two dots: ${calculus}`);
       }
 
       if (!this.isLast(i, chars)) {
         if ((this.isOperator(chars[i]) || this.isDot(chars[i])) && (this.isOperator(chars[i+1]) || this.isDot(chars[i+1]))) {
-          this.throwErrorParse(`two dots, two operators, or dot/operator can't be after one dot/operator: ${calcDto.calculus}`);
+          this.throwErrorParse(`two dots, two operators, or dot/operator can't be after one dot/operator: ${calculus}`);
         }
       }
 
@@ -80,7 +80,7 @@ export class CalcService {
       }
 
       if (this.isLast(i, chars)) {
-        this.throwErrorParse(`Last character isn't number, operator or dot: ${calcDto.calculus}`);
+        this.throwErrorParse(`Last character isn't number, operator or dot: ${calculus}`);
         continue; // should never get there
       }
 
@@ -98,7 +98,7 @@ export class CalcService {
       }
     }
 
-    return new Calc(calcDto.calculus, items);
+    return new Calc(calculus, items);
   }
 
   private isNumber(char: string): boolean {
@@ -127,7 +127,7 @@ export class CalcService {
     throw new HttpException(completeMsg, HttpStatus.UNPROCESSABLE_ENTITY)
   }
 
-  private doCalculate(calc: Calc): string {
+  doCalculate(calc: Calc): string {
     const items: (string|Operator)[] = Array.from(calc.items)    
     let nbOperators: number = 0;
     items.forEach(item => {
@@ -171,5 +171,4 @@ export class CalcService {
 
     return result;
   }
-
 }

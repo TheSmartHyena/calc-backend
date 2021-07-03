@@ -11,4 +11,5 @@ export class CalcController {
   calculate(@Body() sendCalcDto: SendCalcDto) {
     return this.calcService.calculate(sendCalcDto);
   }
+
 }
