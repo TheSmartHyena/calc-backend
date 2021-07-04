@@ -44,7 +44,7 @@ export class CalcService {
         this.throwErrorParse(`un-recognised charater: ${calculus}`);
       }
 
-      if (this.isFirst(i) && (this.isDot(chars[i]) || this.isOperator(chars[i]))) {
+      if (this.isFirst(i) && (this.isDot(chars[i]) || (this.isOperator(chars[i]) && !this.isNegative(chars[i]) ) )) {
         this.throwErrorParse(`can't start with dot or operator: ${calculus}`);
       }
 
@@ -56,16 +56,37 @@ export class CalcService {
         this.throwErrorParse(`an item can't have two dots: ${calculus}`);
       }
 
-      if (!this.isLast(i, chars)) {
-        if ((this.isOperator(chars[i]) || this.isDot(chars[i])) && (this.isOperator(chars[i+1]) || this.isDot(chars[i+1]))) {
-          this.throwErrorParse(`two dots, two operators, or dot/operator can't be after one dot/operator: ${calculus}`);
-        }
+      if (this.isNegative(chars[i]) && curr.hasNegative) {
+        this.throwErrorParse(`an item can't have two negative sign: ${calculus}`);
       }
 
+      /*if ((!(this.isOperator(chars[i+1]) && this.isNegative(chars[i+1])) || this.isDot(chars[i+1]))) {
+        this.throwErrorParse(`two dots, two operators, or dot/operator can't be after one dot/operator: ${calculus}`);
+      }*/
+
+      if (!this.isLast(i, chars) && (this.isOperator(chars[i]) || this.isDot(chars[i]))) {
+        if (this.isDot(chars[i+1]) || (this.isOperator(chars[i+1]) && !this.isNegative(chars[i+1]))) {
+          this.throwErrorParse(`two dots, two operators, or dot/operator can't be after one dot/operator: ${calculus}`);
+        }
+      } 
+      
       // Handle the last char, which is suposed to be a number
       if (this.isLast(i, chars) && this.isNumber(chars[i])) {
         items.push(curr.value + chars[i]);
         continue;
+      }
+
+      // Allow negative members
+      if (this.isFirst(i) && this.isNegative(chars[i])) {
+        curr = new CurrentItem(curr.value += chars[i], false, curr.hasNegative);
+        continue;
+      }
+
+      if (!this.isFirst(i)) {
+        if (this.isNegative(chars[i]) && this.isOperator(chars[i-1])) {
+          curr = new CurrentItem(curr.value += chars[i], false, curr.hasNegative);
+          continue;
+        }
       }
 
       // Adds every number or dot
@@ -91,7 +112,7 @@ export class CalcService {
         continue;
       }
 
-      if (this.isOperator(chars[i]) && this.isNumber(chars[i+1])) {
+      if (this.isOperator(chars[i]) && (this.isNumber(chars[i+1]) || this.isNegative(chars[i+1]))) {
         items.push(this.myOperators.get(chars[i]));
         curr = new CurrentItem("", false);
         continue;
@@ -119,6 +140,10 @@ export class CalcService {
 
   private isDot(char: string): boolean {
     return char === '.';
+  }
+
+  private isNegative(char: string): boolean {
+    return char === '-';
   }
 
   private throwErrorParse(message) {

@@ -26,6 +26,30 @@ describe('AppController (e2e)', () => {
   it('/calc (POST)', () => {
     return request(app.getHttpServer())
       .post('/calc', )
+      .send({calculus: "-1.1+-2.2--3.3*-4.4/-5.5"})
+      .expect(200)
+      .expect({"calculus": "-1.1+-2.2--3.3*-4.4/-5.5","result": "-0.66"});              
+  });
+
+  it('/calc (POST)', () => {
+    return request(app.getHttpServer())
+      .post('/calc', )
+      .send({calculus: "1.1+2.2-3.3*4.4/5.5"})
+      .expect(200)
+      .expect({"calculus": "1.1+2.2-3.3*4.4/5.5","result": "0.66"});              
+  });
+
+  it('/calc (POST)', () => {
+    return request(app.getHttpServer())
+      .post('/calc', )
+      .send({calculus: "-3--3"})
+      .expect(200)
+      .expect({"calculus": "-3--3","result": "0"});              
+  });
+
+  it('/calc (POST)', () => {
+    return request(app.getHttpServer())
+      .post('/calc', )
       .send({calculus: "2++2"})
       .expect(422)       
   });

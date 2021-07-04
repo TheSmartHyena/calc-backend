@@ -137,4 +137,8 @@ describe('CalcService', () => {
         }
     })
 
+    it('should parse -1.1+-2.2--3.3*-4.4/-5.5', () => {
+        expect(service.parse("-1.1+-2.2--3.3*-4.4/-5.5")).toEqual({"calculus":"-1.1+-2.2--3.3*-4.4/-5.5","items":["-1.1",{"value":"+","priority":1,"name":"addition"},"-2.2",{"value":"-","priority":1,"name":"substraction"},"-3.3",{"value":"*","priority":2,"name":"multiplication"},"-4.4",{"value":"/","priority":2,"name":"division"},"-5.5"]});
+    })
+
 });

@@ -23,11 +23,13 @@ export class Operator {
 }
 
 export class CurrentItem {
-    constructor(value: string="", hasDot: boolean=false) {
+    constructor(value: string="", hasDot: boolean=false, hasNegative: boolean=false) {
         this.value = value;
         this.hasDot = hasDot;
+        this.hasNegative = hasNegative;
     }
 
     value: string
     hasDot: boolean
+    hasNegative: boolean
 }
