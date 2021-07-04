@@ -78,25 +78,25 @@ export class CalcService {
 
       // Allow negative members
       if (this.isFirst(i) && this.isNegative(chars[i])) {
-        curr = new CurrentItem(curr.value += chars[i], false, curr.hasNegative);
+        curr = new CurrentItem(curr.value += chars[i], false, true);
         continue;
       }
 
       if (!this.isFirst(i)) {
         if (this.isNegative(chars[i]) && this.isOperator(chars[i-1])) {
-          curr = new CurrentItem(curr.value += chars[i], false, curr.hasNegative);
+          curr = new CurrentItem(curr.value += chars[i], false, true);
           continue;
         }
       }
 
       // Adds every number or dot
       if (this.isNumber(chars[i]) && (this.isNumber(chars[i+1]) || this.isDot(chars[i+1]))) {
-        curr = new CurrentItem(curr.value += chars[i], curr.hasDot);
+        curr = new CurrentItem(curr.value += chars[i], curr.hasDot, curr.hasNegative);
         continue;
       }
 
       if (this.isDot(chars[i])) {
-        curr = new CurrentItem(curr.value += chars[i], true);
+        curr = new CurrentItem(curr.value += chars[i], true, curr.hasNegative);
         continue;
       }
 

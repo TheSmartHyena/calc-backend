@@ -127,6 +127,16 @@ describe('CalcService', () => {
         }
     })
 
+    it('should not parse 3---3', () => {
+        expect.assertions(2);
+        try {
+            service.parse("3---3");
+        } catch (e) {
+            expect(e).toBeInstanceOf(HttpException);
+            expect(e.message).toBe("An error occured during the execution of the calculus: an item can't have two negative sign: 3---3");
+        }
+    })
+
     it('should not parse 2_2', () => {
         expect.assertions(2);
         try {
