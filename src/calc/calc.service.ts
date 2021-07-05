@@ -60,6 +60,8 @@ export class CalcService {
         this.throwErrorParse(`an item can't have two negative sign: ${calculus}`);
       }
 
+      /* TODO -> Make a cleaner version who handles dot folowed by operator */
+
       if (!this.isLast(i, chars) && (this.isOperator(chars[i]) || this.isDot(chars[i]))) {
         if (this.isDot(chars[i+1]) || (this.isOperator(chars[i+1]) && !this.isNegative(chars[i+1]))) {
           this.throwErrorParse(`two dots, two operators, or dot/operator can't be after one dot/operator: ${calculus}`);

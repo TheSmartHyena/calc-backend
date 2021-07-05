@@ -1,0 +1,16 @@
+version: '3.7'
+
+services:
+  main:
+    container_name: calculator_server
+    build:
+      context: .
+      target: production
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - 8080:8080
+    command: npm run start:prod
+    env_file:
+      - .env
