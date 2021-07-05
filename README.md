@@ -5,6 +5,10 @@ A simple calculator made with Love, [Nest](https://github.com/nestjs/nest) frame
 Back-end code is stored [here](https://github.com/TheSmartHyena/calc-backend)
 Front-end code is stored [here](https://github.com/TheSmartHyena/calc-frontend)
 
+## Code documentation
+
+Code documentation is [here](http://philippeskopal.fr/documentation/) made with compodoc.
+
 ## Try it on Heroku
 
 For fast testing, the app is deployed to Heroku [here](https://red-loon-48470.herokuapp.com/).
@@ -53,6 +57,11 @@ I used [compodoc](https://compodoc.app/) to create the documentation.
 - [React](https://fr.reactjs.org/)
 - [React-bootstrap](https://react-bootstrap.github.io/)
 - [Bootstrap 4](https://getbootstrap.com/)
+
+## Known bugs
+1. When lauching "docker-compose ps" sometimes, the build fail with: "[development 4/6] RUN npm install: npm ERR! cb() never called!"
+Didn't find the origin, relaucnhing the command seems to "fix" it.
+On my very old computer, the build takes 1400 seconds, maybe that's the reason.
 
 ## Author
 
