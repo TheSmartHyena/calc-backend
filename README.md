@@ -62,6 +62,7 @@ I used [compodoc](https://compodoc.app/) to create the documentation.
 1. When lauching "docker-compose ps" sometimes, the build fail with: "[development 4/6] RUN npm install: npm ERR! cb() never called!"
 Didn't find the origin, relaucnhing the command seems to "fix" it.
 On my very old computer, the build takes 1400 seconds, maybe that's the reason.
+- Running "docker build . --network host" before "docker-compose ps" seems to solve the problem whet it occurs.
 
 ## Author
 
