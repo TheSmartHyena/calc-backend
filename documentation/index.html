@@ -31,9 +31,11 @@
                    <div class="content-data">
 
 <h2 id="description">Description</h2>
-<p>A simple calculator made with love, <a href="https://github.com/nestjs/nest">Nest</a> framework and React.</p>
+<p>A simple calculator made with Love, <a href="https://github.com/nestjs/nest">Nest</a> framework and React.</p>
 <p>Back-end code is stored <a href="https://github.com/TheSmartHyena/calc-backend">here</a>
 Front-end code is stored <a href="https://github.com/TheSmartHyena/calc-frontend">here</a></p>
+<h2 id="code-documentation">Code documentation</h2>
+<p>Code documentation is <a href="http://philippeskopal.fr/documentation/">here</a> made with compodoc.</p>
 <h2 id="try-it-on-heroku">Try it on Heroku</h2>
 <p>For fast testing, the app is deployed to Heroku <a href="https://red-loon-48470.herokuapp.com/">here</a>.
 Since the host is free, the first launch may take 30 seconds to stop the app from hibernating.</p>
@@ -52,8 +54,9 @@ Or request the API at <a href="http://localhost:8080/calc">http://localhost:8080
 <p>You don&#39;t have to use the browser to use the app. You can manually request the API.
 With <a href="https://insomnia.rest">Insomnia</a> or <a href="https://www.postman.com">Postman</a>, you can send POST request on <a href="http://localhost:8080/calc">http://localhost:8080/calc</a>.
 The body need to match this signature: {calculus: string}.
-Example: {&quot;calculus&quot;: &quot;2+2&quot;} -&gt; As answer you receive: {&quot;calculus&quot;: &quot;2+2&quot;, &quot;result&quot;: &quot;4&quot;}</p>
+Example: {&quot;calculus&quot;: &quot;2+2&quot;} -&gt; As answer you receive: {&quot;calculus&quot;: &quot;2+2&quot;, &quot;result&quot;: &quot;4&quot;}.</p>
 <h2 id="libraries--frameworks-used">Libraries / Frameworks used</h2>
+<p>I used <a href="https://compodoc.app/">compodoc</a> to create the documentation.</p>
 <h1 id="back-end">Back-end</h1>
 <ul>
 <li><a href="https://github.com/nestjs/nest">Nest</a></li>
@@ -64,6 +67,15 @@ Example: {&quot;calculus&quot;: &quot;2+2&quot;} -&gt; As answer you receive: {&
 <li><a href="https://fr.reactjs.org/">React</a></li>
 <li><a href="https://react-bootstrap.github.io/">React-bootstrap</a></li>
 <li><a href="https://getbootstrap.com/">Bootstrap 4</a></li>
+</ul>
+<h2 id="known-bugs">Known bugs</h2>
+<ol>
+<li>When lauching &quot;docker-compose ps&quot; sometimes, the build fail with: &quot;[development 4/6] RUN npm install: npm ERR! cb() never called!&quot;
+Didn&#39;t find the origin, relaucnhing the command seems to &quot;fix&quot; it.
+On my very old computer, the build takes 1400 seconds, maybe that&#39;s the reason.</li>
+</ol>
+<ul>
+<li>Running &quot;docker build . --network host&quot; before &quot;docker-compose ps&quot; seems to solve the problem whet it occurs.</li>
 </ul>
 <h2 id="author">Author</h2>
 <p>Made by Skopal Philippe a.k.a TheSmartHyena</p>
