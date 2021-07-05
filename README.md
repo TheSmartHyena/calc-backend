@@ -39,7 +39,7 @@ Or request the API at http://localhost:8080/calc.
 You don't have to use the browser to use the app. You can manually request the API.
 With [Insomnia](https://insomnia.rest) or [Postman](https://www.postman.com), you can send POST request on http://localhost:8080/calc.
 The body need to match this signature: {calculus: string}.
-Example: {"calculus": "2+2"} -> As answer you receive: {"calculus": "2+2", "result": "4"}
+Example: {"calculus": "2+2"} -> As answer you receive: {"calculus": "2+2", "result": "4"}.
 
 ## Libraries / Frameworks used
 
