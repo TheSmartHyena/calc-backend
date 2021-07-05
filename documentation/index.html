@@ -1,0 +1,138 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>calc-backend documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
+	      <link rel="stylesheet" href="./styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="./" class="navbar-brand">calc-backend documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content getting-started">
+                   <div class="content-data">
+
+<h2 id="description">Description</h2>
+<p>A simple calculator made with love, <a href="https://github.com/nestjs/nest">Nest</a> framework and React.</p>
+<p>Back-end code is stored <a href="https://github.com/TheSmartHyena/calc-backend">here</a>
+Front-end code is stored <a href="https://github.com/TheSmartHyena/calc-frontend">here</a></p>
+<h2 id="try-it-on-heroku">Try it on Heroku</h2>
+<p>For fast testing, the app is deployed to Heroku <a href="https://red-loon-48470.herokuapp.com/">here</a>.
+Since the host is free, the first launch may take 30 seconds to stop the app from hibernating.</p>
+<h2 id="step-1---get-repository">Step 1 - Get repository</h2>
+<div><pre class="line-numbers"><code class="language-bash">$ git clone https://github.com/TheSmartHyena/calc-backend
+$ cd calc-backend</code></pre></div><h2 id="step-2---running-the-app-with-docker">Step 2 - Running the app with Docker</h2>
+<div><pre class="line-numbers"><code class="language-bash">$ docker-compose up</code></pre></div><h2 id="alternative-step-2---installation--running-the-app-with-npm">Alternative Step 2 - Installation &amp; Running the app with NPM</h2>
+<div><pre class="line-numbers"><code class="language-bash"># install node modules
+$ npm install 
+
+# production mode
+$ npm run start:prod</code></pre></div><h2 id="step-3---do-some-math">Step 3 - Do some math</h2>
+<p>You can now open your browser at <a href="http://localhost:8080">http://localhost:8080</a> and use the calculator.
+Or request the API at <a href="http://localhost:8080/calc">http://localhost:8080/calc</a>.</p>
+<h2 id="api">API</h2>
+<p>You don&#39;t have to use the browser to use the app. You can manually request the API.
+With <a href="https://insomnia.rest">Insomnia</a> or <a href="https://www.postman.com">Postman</a>, you can send POST request on <a href="http://localhost:8080/calc">http://localhost:8080/calc</a>.
+The body need to match this signature: {calculus: string}.
+Example: {&quot;calculus&quot;: &quot;2+2&quot;} -&gt; As answer you receive: {&quot;calculus&quot;: &quot;2+2&quot;, &quot;result&quot;: &quot;4&quot;}</p>
+<h2 id="libraries--frameworks-used">Libraries / Frameworks used</h2>
+<h1 id="back-end">Back-end</h1>
+<ul>
+<li><a href="https://github.com/nestjs/nest">Nest</a></li>
+<li><a href="https://github.com/MikeMcl/decimal.js">Decimal.js</a> </li>
+</ul>
+<h1 id="front-end">Front-end</h1>
+<ul>
+<li><a href="https://fr.reactjs.org/">React</a></li>
+<li><a href="https://react-bootstrap.github.io/">React-bootstrap</a></li>
+<li><a href="https://getbootstrap.com/">Bootstrap 4</a></li>
+</ul>
+<h2 id="author">Author</h2>
+<p>Made by Skopal Philippe a.k.a TheSmartHyena</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 0;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'getting-started';
+            var COMPODOC_CURRENT_PAGE_URL = 'index.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="./js/libs/custom-elements.min.js"></script>
+       <script src="./js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="./js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="./js/menu-wc.js" defer></script>
+
+       <script src="./js/libs/bootstrap-native.js"></script>
+
+       <script src="./js/libs/es6-shim.min.js"></script>
+       <script src="./js/libs/EventDispatcher.js"></script>
+       <script src="./js/libs/promise.min.js"></script>
+       <script src="./js/libs/zepto.min.js"></script>
+
+       <script src="./js/compodoc.js"></script>
+
+       <script src="./js/tabs.js"></script>
+       <script src="./js/menu.js"></script>
+       <script src="./js/libs/clipboard.min.js"></script>
+       <script src="./js/libs/prism.js"></script>
+       <script src="./js/sourceCode.js"></script>
+          <script src="./js/search/search.js"></script>
+          <script src="./js/search/lunr.min.js"></script>
+          <script src="./js/search/search-lunr.js"></script>
+          <script src="./js/search/search_index.js"></script>
+       <script src="./js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

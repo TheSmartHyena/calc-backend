@@ -1,0 +1,1516 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>calc-backend documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">calc-backend documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content injectable">
+                   <div class="content-data">
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li>Injectables</li>
+  <li>CalcService</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/calc/calc.service.ts</code>
+        </p>
+
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>The role of CalcService is to parse the calculus into usable data. And with MathService methods, resolve the calculus. <br>
+The logic and the actual math is separated to implements more easely new operators by making the parser agnostic of them. </p>
+
+            </p>
+
+
+
+            <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#myLogger">myLogger</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#myOperators">myOperators</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#calculate">calculate</a>
+                            </li>
+                            <li>
+                                <a href="#doCalculate">doCalculate</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#getHigherPrio">getHigherPrio</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#isDot">isDot</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#isFirst">isFirst</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#isLast">isLast</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#isNegative">isNegative</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#isNumber">isNumber</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#isOperator">isOperator</a>
+                            </li>
+                            <li>
+                                <a href="#parse">parse</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#throwErrorParse">throwErrorParse</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+            <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(mathService: <a href="../injectables/MathService.html">MathService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/calc/calc.service.ts:14</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>mathService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/MathService.html" target="_self" >MathService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+            <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="calculate"></a>
+                    <span class="name">
+                        <b>
+                            calculate
+                        </b>
+                        <a href="#calculate"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>calculate(sendCalcDto: <a href="../classes/SendCalcDto.html">SendCalcDto</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="29"
+                            class="link-to-prism">src/calc/calc.service.ts:29</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>The main method, who does the calculus. First parse the calculus, and resolving it. <br></p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>sendCalcDto</td>
+                                    <td>
+                                                <code><a href="../classes/SendCalcDto.html" target="_self" >SendCalcDto</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <p>DTO formated data sent from the front-end.</p>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>{ calculus: any; result: string; }</code>
+
+                    </div>
+                    <div class="io-description">
+                        <p>The result of the calculus -&gt; {calculus: string, result: string} -&gt; &quot;calculus&quot;: the calculus to resolve. &quot;result&quot;: the result of the calculus.</p>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="doCalculate"></a>
+                    <span class="name">
+                        <b>
+                            doCalculate
+                        </b>
+                        <a href="#doCalculate"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>doCalculate(calc: <a href="../classes/Calc.html">Calc</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="216"
+                            class="link-to-prism">src/calc/calc.service.ts:216</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Will do the calculus. By iterating over the items, executing each operator with the n-1 and n+1 item around the operator in the array. One execution per iteration, There is as many iteration as operators in the items array. <br>
+Ex: &quot;2+2&quot; one iteration. &quot;1+2-3&quot; two iteration. <br>
+At each iteration, the operator who will be executed is the operator matching the highest priority number, if multiple number matches the priority number, only the first one in the iteration will be executed. <br>
+An execution will remove the operator from the array and the n+1 item too. The result of the operation will replace n-1 value in the array. <br>
+Full example: <br>
+  -&gt; 1+2*3 -&gt; after parsing -&gt; [&quot;1&quot;, {value: &quot;+&quot;, name: &quot;addition&quot;, priority: &quot;1&quot;}, &quot;2&quot;, {value: &quot;+&quot;, name: &quot;multiplication&quot;, priority: &quot;2&quot;}, &quot;3&quot;] <br>
+  -&gt; first iteration: [&quot;1&quot;, {value: &quot;+&quot;, name: &quot;addition&quot;, priority: &quot;1&quot;}, &quot;6&quot;] <br>
+  -&gt; second iteration: [&quot;7&quot;]</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>calc</td>
+                                    <td>
+                                                <code><a href="../classes/Calc.html" target="_self" >Calc</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <p>Instance of Calc, holding the parsed Calculus to be calculated</p>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        <p>The result of the calculus</p>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getHigherPrio"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Private</span>
+                            getHigherPrio
+                        </b>
+                        <a href="#getHigherPrio"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getHigherPrio(items: <a href="../classes/Operator.html">(string | Operator)[]</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="253"
+                            class="link-to-prism">src/calc/calc.service.ts:253</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Will return the highter priority number of the items supplied.
+Ex: &quot;1+2-3*4/5&quot; -&gt; returns 2.</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>items</td>
+                                    <td>
+                                                <code><a href="../classes/Operator.html" target="_self" >(string | Operator)[]</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <p>An array of items and operators</p>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        <p>The higher priority number.</p>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isDot"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Private</span>
+                            isDot
+                        </b>
+                        <a href="#isDot"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>isDot(char: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="180"
+                            class="link-to-prism">src/calc/calc.service.ts:180</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Check if the char is a dot.</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>char</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <p>A single char to be checked.</p>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        <p>The boolean value of the check.</p>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isFirst"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Private</span>
+                            isFirst
+                        </b>
+                        <a href="#isFirst"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>isFirst(i: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="161"
+                            class="link-to-prism">src/calc/calc.service.ts:161</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Check if the char is the first of the calculus, by sending the current index of the for loop.</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>i</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <p>Index of the ForLoop.</p>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        <p>The boolean value of the check.</p>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isLast"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Private</span>
+                            isLast
+                        </b>
+                        <a href="#isLast"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>isLast(index: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, chars: string[])</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="171"
+                            class="link-to-prism">src/calc/calc.service.ts:171</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Check if the char is the last of the calculus, by sending the current index of the for loop, and the chars array.</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>index</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <p>Index of the ForLoop.</p>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>chars</td>
+                                    <td>
+                                            <code>string[]</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <p>Chars array, representing the splited string of the calculus.</p>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        <p>The boolean value of the check.</p>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isNegative"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Private</span>
+                            isNegative
+                        </b>
+                        <a href="#isNegative"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>isNegative(char: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="189"
+                            class="link-to-prism">src/calc/calc.service.ts:189</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Check if the char is a negative Operator</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>char</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <p>A single char to be checked.</p>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        <p>The boolean value of the check.</p>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isNumber"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Private</span>
+                            isNumber
+                        </b>
+                        <a href="#isNumber"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>isNumber(char: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="143"
+                            class="link-to-prism">src/calc/calc.service.ts:143</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Check if the char is a number is superior or equal to 0 and is inferior or equal to 9.</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>char</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <p>A single char to be checked.</p>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        <p>The boolean value of the check.</p>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isOperator"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Private</span>
+                            isOperator
+                        </b>
+                        <a href="#isOperator"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>isOperator(char: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="152"
+                            class="link-to-prism">src/calc/calc.service.ts:152</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Check if the char is an operator. Operator are stored in a Map&lt;string, Operator&gt;.</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>char</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <p>A single char to be checked.</p>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        <p>The boolean value of the check.</p>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="parse"></a>
+                    <span class="name">
+                        <b>
+                            parse
+                        </b>
+                        <a href="#parse"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>parse(calculus: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="46"
+                            class="link-to-prism">src/calc/calc.service.ts:46</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>This method parse a calculus string. The process is simple: <br></p>
+<ol>
+<li>Checks if the calculus is valid, if not, throws a user-friendly error. <br></li>
+<li>Separate items (actual numbers) and operators.</li>
+</ol>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>calculus</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <p>String representing the calculus.</p>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../classes/Calc.html" target="_self" >Calc</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        <p>Returns a Calc with Calc.items property filled with the parsed calculus.</p>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="throwErrorParse"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Private</span>
+                            throwErrorParse
+                        </b>
+                        <a href="#throwErrorParse"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>throwErrorParse(message)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="198"
+                            class="link-to-prism">src/calc/calc.service.ts:198</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Send an error message to the front-end, with 422 code, who&#39;s catched by the front-end and properly handled. And make a clean log.</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>message</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <p>User friendly message of the error.</p>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+            <section>
+    
+        <h3 id="inputs">
+            Properties
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="myLogger"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                                <span class="modifier">Readonly</span>
+                            myLogger</b>
+                            <a href="#myLogger"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>new Logger(CalcService.name)</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/calc/calc.service.ts:13</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="myOperators"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                                <span class="modifier">Readonly</span>
+                            myOperators</b>
+                            <a href="#myOperators"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../classes/Operator.html" target="_self" >Map&lt;string | Operator&gt;</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>new Map()</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/calc/calc.service.ts:14</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+</section>
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { HttpException, HttpStatus, Injectable, Logger } from &#x27;@nestjs/common&#x27;;
+import { SendCalcDto } from &#x27;./dto/send-calc.dto&#x27;;
+import { Calc, CurrentItem, Operator } from &#x27;./entities/calc.entity&#x27;;
+import { MathService } from &#x27;./math.service&#x27;;
+import * as data from &#x27;./operators.json&#x27;;
+
+/**
+ * The role of CalcService is to parse the calculus into usable data. And with MathService methods, resolve the calculus. &lt;br&gt;
+ * The logic and the actual math is separated to implements more easely new operators by making the parser agnostic of them. 
+ */
+@Injectable()
+export class CalcService {
+  private readonly myLogger &#x3D; new Logger(CalcService.name);
+  private readonly myOperators: Map&lt;string, Operator&gt; &#x3D; new Map();
+
+  constructor(
+    private mathService: MathService
+  ) {
+    data.operators.forEach(obj &#x3D;&gt; {
+      this.myOperators.set(obj.value, new Operator(obj.value, Number(obj.priority), obj.name))
+    })
+  }
+  
+  /**
+   * The main method, who does the calculus. First parse the calculus, and resolving it. &lt;br&gt;
+   * @param {SendCalcDto} sendCalcDto DTO formated data sent from the front-end.
+   * @returns {object} The result of the calculus -&gt; {calculus: string, result: string} -&gt; &quot;calculus&quot;: the calculus to resolve. &quot;result&quot;: the result of the calculus.
+   */
+  calculate(sendCalcDto: SendCalcDto) {
+    const calc &#x3D; this.parse(sendCalcDto.calculus);
+    calc.result &#x3D; this.doCalculate(calc);
+    
+    return {
+      calculus: calc.calculus,
+      result: this.doCalculate(calc)
+    };
+  }
+
+  /**
+   * This method parse a calculus string. The process is simple: &lt;br&gt;
+   *  1. Checks if the calculus is valid, if not, throws a user-friendly error. &lt;br&gt;
+   *  2. Separate items (actual numbers) and operators.
+   * @param calculus String representing the calculus.
+   * @returns {Calc} Returns a Calc with Calc.items property filled with the parsed calculus.
+   */
+  parse(calculus: string): Calc {
+    const items: (string |Operator)[] &#x3D; []
+    let curr &#x3D; new CurrentItem();
+
+    const chars &#x3D; calculus.split(&quot;&quot;);
+    for (let i&#x3D;0; i&lt;chars.length; i++) {
+
+      // Handle wrong items composition
+      if (chars[i] &#x3D;&#x3D;&#x3D; &#x27; &#x27;) {
+        this.throwErrorParse(&#x60;can&#x27;t contain any white-space: ${calculus}&#x60;);
+      }
+
+      if (!this.isOperator(chars[i]) &amp;&amp; !this.isDot(chars[i]) &amp;&amp; !this.isNumber(chars[i])) {
+        this.throwErrorParse(&#x60;un-recognised charater: ${calculus}&#x60;);
+      }
+
+      if (this.isFirst(i) &amp;&amp; (this.isDot(chars[i]) || (this.isOperator(chars[i]) &amp;&amp; !this.isNegative(chars[i]) ) )) {
+        this.throwErrorParse(&#x60;can&#x27;t start with dot or operator: ${calculus}&#x60;);
+      }
+
+      if (this.isLast(i, chars) &amp;&amp; (this.isOperator(chars[i]) || this.isDot(chars[i]))) {
+        this.throwErrorParse(&#x60;can&#x27;t end with dot or operator: ${calculus}&#x60;);
+      }
+
+      if (this.isDot(chars[i]) &amp;&amp; curr.hasDot) {
+        this.throwErrorParse(&#x60;an item can&#x27;t have two dots: ${calculus}&#x60;);
+      }
+
+      if (this.isNegative(chars[i]) &amp;&amp; curr.hasNegative) {
+        this.throwErrorParse(&#x60;an item can&#x27;t have two negative sign: ${calculus}&#x60;);
+      }
+
+      /* TODO -&gt; Make a cleaner version who handles dot folowed by operator */
+
+      if (!this.isLast(i, chars) &amp;&amp; (this.isOperator(chars[i]) || this.isDot(chars[i]))) {
+        if (this.isDot(chars[i+1]) || (this.isOperator(chars[i+1]) &amp;&amp; !this.isNegative(chars[i+1]))) {
+          this.throwErrorParse(&#x60;two dots, two operators, or dot/operator can&#x27;t be after one dot/operator: ${calculus}&#x60;);
+        }
+      } 
+      
+      // Handle the last char, which is suposed to be a number
+      if (this.isLast(i, chars) &amp;&amp; this.isNumber(chars[i])) {
+        items.push(curr.value + chars[i]);
+        continue;
+      }
+
+      // Allow negative members
+      if (this.isFirst(i) &amp;&amp; this.isNegative(chars[i])) {
+        curr &#x3D; new CurrentItem(curr.value +&#x3D; chars[i], false, true);
+        continue;
+      }
+
+      if (!this.isFirst(i)) {
+        if (this.isNegative(chars[i]) &amp;&amp; this.isOperator(chars[i-1])) {
+          curr &#x3D; new CurrentItem(curr.value +&#x3D; chars[i], false, true);
+          continue;
+        }
+      }
+
+      // Adds every number or dot
+      if (this.isNumber(chars[i]) &amp;&amp; (this.isNumber(chars[i+1]) || this.isDot(chars[i+1]))) {
+        curr &#x3D; new CurrentItem(curr.value +&#x3D; chars[i], curr.hasDot, curr.hasNegative);
+        continue;
+      }
+
+      if (this.isDot(chars[i])) {
+        curr &#x3D; new CurrentItem(curr.value +&#x3D; chars[i], true, curr.hasNegative);
+        continue;
+      }
+
+      if (this.isLast(i, chars)) {
+        this.throwErrorParse(&#x60;Last character isn&#x27;t number, operator or dot: ${calculus}&#x60;);
+        continue; // should never get there
+      }
+
+      // Handle a  switch from number/operator happen
+      if (this.isNumber(chars[i]) &amp;&amp; this.isOperator(chars[i+1])) {
+        items.push(curr.value + chars[i]);
+        curr &#x3D; new CurrentItem(&quot;&quot;, false);
+        continue;
+      }
+
+      if (this.isOperator(chars[i]) &amp;&amp; (this.isNumber(chars[i+1]) || this.isNegative(chars[i+1]))) {
+        items.push(this.myOperators.get(chars[i]));
+        curr &#x3D; new CurrentItem(&quot;&quot;, false);
+        continue;
+      }
+    }
+
+    return new Calc(calculus, items);
+  }
+
+  /**
+   * Check if the char is a number is superior or equal to 0 and is inferior or equal to 9.
+   * @param char A single char to be checked.
+   * @returns {boolean} The boolean value of the check.
+   */
+  private isNumber(char: string): boolean {
+    return (+char &gt;&#x3D; 0 &amp;&amp; +char &lt;&#x3D; 9);
+  }
+
+  /**
+   * Check if the char is an operator. Operator are stored in a Map&lt;string, Operator&gt;.
+   * @param char A single char to be checked.
+   * @returns {boolean} The boolean value of the check.
+   */
+  private isOperator(char: string): boolean {
+    return this.myOperators.has(char);
+  }
+
+  /**
+   * Check if the char is the first of the calculus, by sending the current index of the for loop.
+   * @param i Index of the ForLoop.
+   * @returns {boolean} The boolean value of the check.
+   */
+  private isFirst(i: number): boolean {
+    return i &#x3D;&#x3D;&#x3D; 0;
+  }
+
+  /**
+   * Check if the char is the last of the calculus, by sending the current index of the for loop, and the chars array.
+   * @param index Index of the ForLoop.
+   * @param chars Chars array, representing the splited string of the calculus.
+   * @returns {boolean} The boolean value of the check.
+   */
+  private isLast(index: number, chars: string[]): boolean {
+    return index &#x3D;&#x3D; (chars.length-1);
+  }
+
+  /**
+   * Check if the char is a dot.
+   * @param char A single char to be checked.
+   * @returns {boolean} The boolean value of the check.
+   */
+  private isDot(char: string): boolean {
+    return char &#x3D;&#x3D;&#x3D; &#x27;.&#x27;;
+  }
+
+  /**
+   * Check if the char is a negative Operator
+   * @param char A single char to be checked.
+   * @returns {boolean} The boolean value of the check.
+   */
+  private isNegative(char: string): boolean {
+    return char &#x3D;&#x3D;&#x3D; &#x27;-&#x27;;
+  }
+
+  /**
+   * Send an error message to the front-end, with 422 code, who&#x27;s catched by the front-end and properly handled. And make a clean log.
+   * @param message User friendly message of the error.
+   * @throws {HttpException} A user friendly error
+   */
+  private throwErrorParse(message) {
+    const completeMsg &#x3D; &#x60;An error occured during the execution of the calculus: ${message}&#x60;;
+    this.myLogger.error(completeMsg);
+    throw new HttpException(completeMsg, HttpStatus.UNPROCESSABLE_ENTITY)
+  }
+
+  /**
+   * Will do the calculus. By iterating over the items, executing each operator with the n-1 and n+1 item around the operator in the array. One execution per iteration, There is as many iteration as operators in the items array. &lt;br&gt;
+   * Ex: &quot;2+2&quot; one iteration. &quot;1+2-3&quot; two iteration. &lt;br&gt;
+   * At each iteration, the operator who will be executed is the operator matching the highest priority number, if multiple number matches the priority number, only the first one in the iteration will be executed. &lt;br&gt;
+   * An execution will remove the operator from the array and the n+1 item too. The result of the operation will replace n-1 value in the array. &lt;br&gt;
+   * Full example: &lt;br&gt;
+   *  -&gt; 1+2*3 -&gt; after parsing -&gt; [&quot;1&quot;, {value: &quot;+&quot;, name: &quot;addition&quot;, priority: &quot;1&quot;}, &quot;2&quot;, {value: &quot;+&quot;, name: &quot;multiplication&quot;, priority: &quot;2&quot;}, &quot;3&quot;] &lt;br&gt;
+   *  -&gt; first iteration: [&quot;1&quot;, {value: &quot;+&quot;, name: &quot;addition&quot;, priority: &quot;1&quot;}, &quot;6&quot;] &lt;br&gt;
+   *  -&gt; second iteration: [&quot;7&quot;]
+   * @param {Calc} calc Instance of Calc, holding the parsed Calculus to be calculated
+   * @returns The result of the calculus
+   */
+  doCalculate(calc: Calc): string {
+    const items: (string|Operator)[] &#x3D; Array.from(calc.items)    
+    let nbOperators: number &#x3D; 0;
+    items.forEach(item &#x3D;&gt; {
+      if (item instanceof Operator) {
+        nbOperators++;
+      }
+    })
+
+    let higherPrio &#x3D; 0;
+    for (let j&#x3D;0; j&lt;nbOperators; j++) {
+      higherPrio &#x3D; 0;
+      higherPrio &#x3D; this.getHigherPrio(items);
+      for (let i&#x3D;0; i&lt;items.length; i++) {
+
+        if ( typeof items[i] &#x3D;&#x3D; &#x27;string&#x27;) {
+          continue;
+        }
+
+        if ((items[i] as Operator).priority &#x3D;&#x3D;&#x3D; higherPrio) {
+          items[i-1] &#x3D; this.mathService.getMathFunction((items[i] as Operator).name)(items[i-1], items[i+1]);
+          items.splice(i+1, 1)
+          items.splice(i, 1)
+          break;
+        }
+      }
+    }
+    
+    return items[0] as string;
+  }
+
+  /**
+   * Will return the highter priority number of the items supplied.
+   * Ex: &quot;1+2-3*4/5&quot; -&gt; returns 2.
+   * @param items An array of items and operators
+   * @returns {number} The higher priority number.
+   */
+  private getHigherPrio(items: (string|Operator)[]): number {
+    let result &#x3D; 0
+
+    items.forEach(item &#x3D;&gt; {
+      if (item instanceof Operator) {
+        if (item.priority &gt; result) {
+          result &#x3D; item.priority;
+        }
+      }
+    })
+
+    return result;
+  }
+}
+</code></pre>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+                   
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
+            var COMPODOC_CURRENT_PAGE_URL = 'CalcService.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
